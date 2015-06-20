@@ -1,19 +1,101 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <style>
+      <!-- Bootstrap core CSS -->
+    <!--
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    -->
+    
+    <style type="text/css">
       body { margin: 0px; padding: 20px; }
       #received { width: 500px; height: 300px; border: 1px solid #dedede; overflow-y:scroll;}
       #sent { width: 500px; } 
+      #airtemp { width: 250px;} 
+      
+        #sens_moistuer, #sens_humidity, #sens_light, #sensor0,  #time, #analog, #digital {
+                margin: 5px 5px 5px 5px;
+                width: 160px;
+                height: 45px;
+                font-size: 24pt;
+                font-weight: bold;
+                color: white;
+                text-align: center;
+                background-color: Blue;
+        }
+        
+      
+      
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="/static/main.js"></script>
+    <!--
+    <script src="js/bootstrap.min.js"></script>
+-->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 
   </head>
   <body>
-  <h1>Websockets serial console</h1>
+  <h1 style="padding-left: 80px;">Personal FabFarm</h1>
+
+
+  
+	<div style="position: relative; background: url(https://lh3.googleusercontent.com/syK_93EfWgDzb_Z3uS2fPLgddEQtxz6v3-htMbQW1FH_=s600			); width: 436px; height: 500px;">
+	
+	<!-- em relative to font size -->
+	<!-- light -->
+		<div style="position: absolute; top: 0.5em; left: 0.5em; width: 400px; font-weight: bold; color: #fff;">
+		  		<img src="https://lh3.googleusercontent.com/BBiwhuC64I0i8i3dqpYQhe2p-9OHtoTR6QyG_Q8qcuqZ=s50-no"
+		  			id="img_light" data-toggle="tooltip" data-placement="top" title="light value 0-1024">
+		</div>
+		<div style="position: absolute; top: 11px; left: 60px; width: 400px; font-weight: bold; color: #fff;">
+		  	<span data-toggle="tooltip" data-placement="top" title="light value 0-1024" id="sens_light"></span>
+		</div>
+		
+		<!-- humidity -->
+		<div style="position: absolute; top: 50px; left: 0.5em; width: 400px; font-weight: bold; color: #fff;">
+		  		<img src="https://lh3.googleusercontent.com/TaJUpVRrin6bUszAFaHq7NQs9aqp2EikgXvoLk_0Wek4=s50-no"
+		  			id="img_humidity" data-toggle="tooltip" data-placement="top" title="humidity value %" >
+		</div>
+		<div style="position: absolute; top: 61px; left: 60px; width: 400px; font-weight: bold; color: #fff;">
+		  	<span id="sens_humidity" data-toggle="tooltip" data-placement="top" title="humidity value %"></span>
+		</div>
+		
+		<!-- moistuer -->
+		<div style="position: absolute; top: 100px; left: 232px; width: 400px; font-weight: bold; color: #fff;">
+		  		<img src="https://lh3.googleusercontent.com/TUDDu5XObEXTJGI-K5fQmkT3oP29Qj0_TTrwRP03Ibi_=s50-no"
+		  			id="img_moistuer" data-toggle="tooltip" data-placement="top" title="moisteur value 0-1024">
+		</div>
+		<div style="position: absolute; top: 111px; left: 292px; width: 400px; font-weight: bold; color: #fff;">
+		  	<span id="sens_moistuer" data-toggle="tooltip" data-placement="top" title="moisteur value 0-1024"></span>
+		</div>
+	
+	</div>
+  	<br>
+
+<!--
+<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+-->
 
   <p>Data received from serial port</p>
+  air temperature: 
+  <div >
+  	
+  </div>
+  
+      <div align="center">
+        <div>Sensor 0: <span id="sensor0"></span></div>
+        <div>Sensor 1: <span id="sensor1"></span></div>
+        <div>Sensor 2: <span id="sensor2"></span></div>
+        <div>Sensor 3: <span id="sensor3"></span></div>
+    </div>
+  
+  <form id="airtemp">
+  	<input type="text" id="input_airtemp"> 
+  		
+  </form>
+  <br>
   <div id="received">
   
   </div>
@@ -32,5 +114,17 @@
   -->
   	<button id="cmd_valve">Open</button>
   </form>
+  
+  
+  <!--
+  Necessary to be quick and have design
+  -->
+  
+  	<script>
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip(); 
+	});
+	</script>
+	
   </body>
 </html>

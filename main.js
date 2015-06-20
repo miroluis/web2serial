@@ -2,11 +2,14 @@ $(document).ready(function(){
 
 var received = $('#received');
 
+var input_airtemp = $('#input_airtemp');
+
 
 var socket = new WebSocket("ws://fabfarm.local:8080/ws");
  
 socket.onopen = function(){  
   console.log("connected"); 
+  temp_aux = 0;
 }; 
 
 socket.onmessage = function (message) {
@@ -17,6 +20,36 @@ socket.onmessage = function (message) {
   var wtf    = $('#received'); //keep scroll down in div
   var height = wtf[0].scrollHeight;
   wtf.scrollTop(height);
+  
+  temp_aux = temp_aux + 1;
+  //airtemp.clear();
+  input_airtemp.val(temp_aux);
+  //airtemp.append($('<br/>'));
+  
+  $("#sensor0").text("valores");
+  
+  //get light value and print it
+  //var str = "Hello world, welcome to the universe.";
+  var n_light = message.data.indexOf("light = ");
+  if (n_light > -1){
+  	n_light += 8;
+  	var light_value = message.data.substring(n_light, n_light + 3);
+  	
+  	$("#sens_light").css("background-color", "transparent");
+  	$("#sens_light").text(light_value);
+  }
+  
+  var n_humidity = message.data.indexOf("Humidity:");
+    console.log("n_humidity ");
+    console.log(n_humidity);
+  if (n_humidity > -1){
+  	n_humidity += 10;
+  	var humidity_value = message.data.substring(n_humidity, n_humidity + 5);
+  	
+  	$("#sens_humidity").css("background-color", "transparent");
+  	$("#sens_humidity").text(humidity_value+"%");
+  }
+  
   
 };
 
