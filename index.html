@@ -12,7 +12,7 @@
       #sent { width: 500px; } 
       #airtemp { width: 250px;} 
       
-        #sens_moistuer, #sens_humidity, #sens_light, #sensor0,  #time, #analog, #digital {
+        #sens_tap, #sens_temperature, #sens_moisture, #sens_humidity, #sens_light, #sensor0,  #time, #analog, #digital {
                 margin: 5px 5px 5px 5px;
                 width: 160px;
                 height: 45px;
@@ -23,7 +23,20 @@
                 background-color: Blue;
         }
         
-      
+     #cmd_tap {
+    /*
+    	background-image:url("https://lh3.googleusercontent.com/VnecGzD-TcsOFf6lKQKfKMfDqXnePXH8n0cpZWh69W0e=s50-no");
+    	background-repeat:no-repeat;
+    	*/
+    	
+    	background-color: transparent;
+    	
+    	  display : block;
+    	width: 60px;
+        height: 60px;
+    	border:0px solid yellow;
+    	color:#454545;
+	}
       
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -54,21 +67,49 @@
 		</div>
 		
 		<!-- humidity -->
-		<div style="position: absolute; top: 50px; left: 0.5em; width: 400px; font-weight: bold; color: #fff;">
+		<div style="position: absolute; top: 60px; left: 0.5em; width: 400px; font-weight: bold; color: #fff;">
 		  		<img src="https://lh3.googleusercontent.com/TaJUpVRrin6bUszAFaHq7NQs9aqp2EikgXvoLk_0Wek4=s50-no"
-		  			id="img_humidity" data-toggle="tooltip" data-placement="top" title="humidity value %" >
+		  			id="img_humidity" data-toggle="tooltip" data-placement="top" title="humidity value in %" >
 		</div>
-		<div style="position: absolute; top: 61px; left: 60px; width: 400px; font-weight: bold; color: #fff;">
-		  	<span id="sens_humidity" data-toggle="tooltip" data-placement="top" title="humidity value %"></span>
+		<div style="position: absolute; top: 71px; left: 60px; width: 400px; font-weight: bold; color: #fff;">
+		  	<span id="sens_humidity" data-toggle="tooltip" data-placement="top" title="humidity value in %"></span>
 		</div>
 		
 		<!-- moistuer -->
-		<div style="position: absolute; top: 100px; left: 232px; width: 400px; font-weight: bold; color: #fff;">
+		<div style="position: absolute; top: 0.5em; left: 232px; width: 400px; font-weight: bold; color: #fff;">
 		  		<img src="https://lh3.googleusercontent.com/TUDDu5XObEXTJGI-K5fQmkT3oP29Qj0_TTrwRP03Ibi_=s50-no"
-		  			id="img_moistuer" data-toggle="tooltip" data-placement="top" title="moisteur value 0-1024">
+		  			id="img_moisture" data-toggle="tooltip" data-placement="top" title="soil moisture value 0-1024">
 		</div>
-		<div style="position: absolute; top: 111px; left: 292px; width: 400px; font-weight: bold; color: #fff;">
-		  	<span id="sens_moistuer" data-toggle="tooltip" data-placement="top" title="moisteur value 0-1024"></span>
+		<div style="position: absolute; top: 11px; left: 292px; width: 400px; font-weight: bold; color: #fff;">
+		  	<span id="sens_moisture" data-toggle="tooltip" data-placement="top" title="soil moisture value 0-1024"></span>
+		</div>
+		
+				<!-- temperature -->
+		<div style="position: absolute; top: 60px; left: 232px; width: 400px; font-weight: bold; color: #fff;">
+		  		<img src="https://lh3.googleusercontent.com/Z9jGAqWzEBecBruqQonn0f5qvkx8oo3COQ-ylB3V5qiG=s50-no"
+		  			id="img_temperature" data-toggle="tooltip" data-placement="top" title="temperature value in ºC">
+		</div>
+		<div style="position: absolute; top: 71px; left: 292px; width: 400px; font-weight: bold; color: #fff;">
+		  	<span id="sens_temperature" data-toggle="tooltip" data-placement="top" title="temperature value in ºC"></span>
+		</div>
+		<!-- tap -->
+		<div style="position: absolute; top: 160px; left: 232px; width: 100px; font-weight: bold; color: #fff;">
+		<!--
+		 <form >
+  			<input id="cmd_tap" type="image" src="https://lh3.googleusercontent.com/VnecGzD-TcsOFf6lKQKfKMfDqXnePXH8n0cpZWh69W0e=s50-no" alt="Submit" width="60" height="60">
+		</form>
+		 -->
+		 
+		  <button id="cmd_tap">
+		  	
+		  		<img src="https://lh3.googleusercontent.com/VnecGzD-TcsOFf6lKQKfKMfDqXnePXH8n0cpZWh69W0e=s50-no"
+		  			id="img_tap" data-toggle="tooltip" data-placement="top" title="Open and close irrigation tap">
+		  			
+		 </button>
+		 
+		</div>
+		<div style="position: absolute; top: 157px; left: 100px; width: 140px; font-weight: bold; color: #fff;">
+		  	<span id="sens_tap" data-toggle="tooltip" data-placement="top" title="Open and close irrigation tap"></span>
 		</div>
 	
 	</div>
@@ -77,7 +118,7 @@
 <!--
 <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
 -->
-
+<!--
   <p>Data received from serial port</p>
   air temperature: 
   <div >
@@ -96,9 +137,11 @@
   		
   </form>
   <br>
+  -->
   <div id="received">
   
   </div>
+  <!--
   <button id="clear">Clear</button>
   
   <p>Send data to serial port</p>
@@ -108,13 +151,16 @@
   </form>
   <br>
   <p>Valve</p>
+  -->
+  <!--
   <form id="valve">
+  -->
   	<!--
   	<input type="text" id="cmd_value">
-  -->
-  	<button id="cmd_valve">Open</button>
+  - - >
+  	 <button id="cmd_valve">Open</button>
   </form>
-  
+  -->
   
   <!--
   Necessary to be quick and have design

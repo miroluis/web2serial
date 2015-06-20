@@ -29,7 +29,6 @@ socket.onmessage = function (message) {
   $("#sensor0").text("valores");
   
   //get light value and print it
-  //var str = "Hello world, welcome to the universe.";
   var n_light = message.data.indexOf("light = ");
   if (n_light > -1){
   	n_light += 8;
@@ -38,10 +37,10 @@ socket.onmessage = function (message) {
   	$("#sens_light").css("background-color", "transparent");
   	$("#sens_light").text(light_value);
   }
-  
+    //get Humidity value and print it
   var n_humidity = message.data.indexOf("Humidity:");
-    console.log("n_humidity ");
-    console.log(n_humidity);
+    //console.log("n_humidity ");
+    //console.log(n_humidity);
   if (n_humidity > -1){
   	n_humidity += 10;
   	var humidity_value = message.data.substring(n_humidity, n_humidity + 5);
@@ -49,7 +48,45 @@ socket.onmessage = function (message) {
   	$("#sens_humidity").css("background-color", "transparent");
   	$("#sens_humidity").text(humidity_value+"%");
   }
+    //get moisture value and print it
+  var n_moisture = message.data.indexOf("moisture = ");
+  if (n_moisture > -1){
+  	n_moisture += 10;
+  	var moisture_value = message.data.substring(n_moisture, n_moisture + 5);
+  	
+  	$("#sens_moisture").css("background-color", "transparent");
+  	$("#sens_moisture").text(moisture_value);
+  }
   
+  //get temperature value and print it
+  var n_temperature = message.data.indexOf("Temperature: ");
+      console.log("n_temperature ");
+    console.log(n_temperature);
+  if (n_temperature > -1){
+  	n_temperature += 13;
+  	var temperature_value = message.data.substring(n_temperature, n_temperature + 5);
+  	
+  	$("#sens_temperature").css("background-color", "transparent");
+  	$("#sens_temperature").text(temperature_value+"ºC");
+  }
+  
+    //get tap close signal and print it
+  var n_tap = message.data.indexOf("Close");
+      console.log("n_tap ");
+    console.log(n_tap);
+  if (n_tap > -1){
+  	$("#sens_tap").css("background-color", "transparent");
+  	$("#sens_tap").text("");
+  }
+  
+      //get tap open signal and print it
+  var n_tap2 = message.data.indexOf("Open");
+      console.log("n_tap2 ");
+    console.log(n_tap2);
+  if (n_tap2 > -1){
+  	$("#sens_tap").css("background-color", "transparent");
+  	$("#sens_tap").text("Close it");
+  }
   
 };
 
@@ -75,6 +112,22 @@ $("#cmd_send").click(function(ev){
 });
 
 $("#cmd_valve").click(function(ev){
+  ev.preventDefault();
+  var cmd = $("#cmd_valve").html()+"\n"
+  //$('#cmd_value').val();
+  sendMessage({ 'data' : cmd});
+  //$('#cmd_value').val("");
+    console.log($("#cmd_valve").html());
+  if($("#cmd_valve").html() == "Open"){
+  	$("#cmd_valve").html('Close');
+  }
+  else{
+    $("#cmd_valve").html('Open');
+  }
+
+}); 
+  
+$("#cmd_tap").click(function(ev){
   ev.preventDefault();
   var cmd = $("#cmd_valve").html()+"\n"
   //$('#cmd_value').val();
