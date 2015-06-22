@@ -145,6 +145,14 @@ $("#cmd_tap").click(function(ev){
   
 });
 
+$("#cmd_repeat").click(function(ev){
+  ev.preventDefault();
+  var cmd = "Repeat:" + $("#in_repeat").val()+"\n"
+  //cmd = "Repeat:";
+  sendMessage({ 'data' : cmd});
+
+});
+
 $('#clear').click(function(){
   received.empty();
 });
