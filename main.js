@@ -77,6 +77,7 @@ socket.onmessage = function (message) {
   if (n_tap > -1){
   	$("#sens_tap").css("background-color", "transparent");
   	$("#sens_tap").text("");
+  	$("#sens_temperature").text("Close it");
   }
   
       //get tap open signal and print it
@@ -86,6 +87,7 @@ socket.onmessage = function (message) {
   if (n_tap2 > -1){
   	$("#sens_tap").css("background-color", "transparent");
   	$("#sens_tap").text("Close it");
+  	$("#sens_temperature").text("Close it");
   }
   
 };
@@ -129,16 +131,16 @@ $("#cmd_valve").click(function(ev){
   
 $("#cmd_tap").click(function(ev){
   ev.preventDefault();
-  var cmd = $("#cmd_valve").html()+"\n"
+  var cmd = $("#cmd_tap").val()+"\n"
   //$('#cmd_value').val();
   sendMessage({ 'data' : cmd});
   //$('#cmd_value').val("");
-    console.log($("#cmd_valve").html());
-  if($("#cmd_valve").html() == "Open"){
-  	$("#cmd_valve").html('Close');
+    console.log($("#cmd_tap").val());
+  if($("#cmd_tap").val() == "Open"){
+  	$("#cmd_tap").val('Close');
   }
   else{
-    $("#cmd_valve").html('Open');
+    $("#cmd_tap").val('Open');
   }
   
 });
